@@ -18,7 +18,8 @@ const axiosInstance = axios.create({
 });
 
 export const fetchMovies = async (
-  query: string
+  query: string,
+  page: number = 1
 ): Promise<MovieSearchResponse> => {
   const response = await axiosInstance.get<MovieSearchResponse>(
     "/search/movie",
@@ -27,7 +28,7 @@ export const fetchMovies = async (
         query,
         include_adult: false,
         language: "en-US",
-        page: 1,
+        page,
       },
     }
   );
