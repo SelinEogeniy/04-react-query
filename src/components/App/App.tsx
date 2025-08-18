@@ -17,14 +17,12 @@ const App = () => {
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
 
-  // TanStack Query для получения фильмов
   const { data, isLoading, isError } = useQuery({
     queryKey: ["movies", query, page],
     queryFn: () => fetchMovies(query, page),
-    enabled: !!query, // Запрос выполняется только если есть query
+    enabled: !!query, 
   });
 
-  // Показываем toast если нет результатов
   useEffect(() => {
     if (data && data.results.length === 0 && query && !isLoading) {
       toast.error("No movies found for your request.");
@@ -33,7 +31,7 @@ const App = () => {
 
   const handleSearch = (searchQuery: string) => {
     setQuery(searchQuery);
-    setPage(1); // Сбрасываем на первую страницу при новом поиске
+    setPage(1);
   };
 
   const handlePageChange = ({ selected }: { selected: number }) => {
