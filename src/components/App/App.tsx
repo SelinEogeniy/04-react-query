@@ -20,14 +20,14 @@ const App = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["movies", query, page],
     queryFn: () => fetchMovies(query, page),
-    enabled: !!query, 
+    enabled: !!query,
   });
 
   useEffect(() => {
-    if (data && data.results.length === 0 && query && !isLoading) {
+    if (data && data.results.length === 0 && query) {
       toast.error("No movies found for your request.");
     }
-  }, [data, query, isLoading]);
+  }, [data, query]);
 
   const handleSearch = (searchQuery: string) => {
     setQuery(searchQuery);
